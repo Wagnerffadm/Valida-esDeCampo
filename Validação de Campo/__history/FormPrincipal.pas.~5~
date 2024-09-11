@@ -1,0 +1,57 @@
+unit FormPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    Edit6: TEdit;
+  private
+    { Private declarations }
+    function ValidarTodosCampos: boolean;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+function TForm1.ValidarTodosCampos: boolean;
+  var
+  I: Integer;
+
+begin
+  Result := false;
+  for I := 0 to Self.ComponentCount -1 do
+  begin
+    if Self.Components[I] is TCustomEdit then
+    begin
+      if TEdit(Self.Components[I]).Text = EmptyStr then
+      begin
+         TEdit(Self.Components[I]).Color = clRed;
+         TEdit(Self.Components[I]).SetFocus;
+         Result := True;
+      end;
+    end;
+  end;
+
+end;
+end;
+
+end.
+
+
